@@ -1,0 +1,236 @@
+
+* { box-sizing: border-box; }
+
+html, body { 
+	height: 100%; 
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Arial, sans-serif;
+  color: #222;
+
+  background: url("../recursos/bg.svg");
+  background-size: cover;
+	background-attachment: fixed;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 18px auto;
+  padding: 0 18px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.logo img {
+  height: 76px;
+  display: block;
+	margin-left: 350px;
+}
+
+.navegacion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+}
+
+.navegacion a {
+  text-decoration: none;
+  color: #33322e;
+}
+
+.navegacion p {
+  margin: 0;
+}
+
+.github-icon {
+  width: 26px;
+  height: 26px;
+  opacity: .75;
+}
+
+
+.input-section {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 18px;
+}
+
+.imput {
+  width: min(860px, 100%);
+  display: flex;
+  border: 3px solid #33322e;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+}
+
+#taskInput {
+  flex: 1;
+  padding: 18px 16px;
+  border: 0;
+  outline: none;
+  font-size: 20px;
+}
+
+.add-btn {
+  width: 170px;
+  border: 0;
+  border-left: 3px solid #2c2c2c;
+  background: #ffd3e3;
+  font-size: 20px;
+  cursor: pointer;
+}
+.add-btn:active { transform: translateY(1px); }
+
+.layout {
+  display: flex;
+  justify-content: center;
+}
+
+.list-section {
+  width: min(860px, 100%);
+  border: 3px solid #33322e;
+  border-radius: 15px;
+  background: #fff;
+  overflow: hidden;
+  min-height: 520px;
+}
+
+.list-encabezado {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  border-bottom: 3px solid #33322e;
+}
+
+.mark-all {
+  border: 0;
+  border-right: 3px solid #33322e;
+  background: #8cd4cb;
+  font-size: 18px;
+  padding: 16px 14px;
+  cursor: pointer;
+}
+
+.slogan {
+  margin: 0;
+  padding: 16px 16px;
+  font-weight: 900;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 18px 18px 0;
+}
+
+.vacio {
+  padding: 18px 18px 24px;
+  color: #33322e;
+}
+
+.vacio-titulo {
+  margin: 12px 0 14px;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.tips {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 2;
+}
+
+.list-footer {
+  border-top: 3px solid #33322e;
+  padding: 12px 16px;
+  font-weight: 800;
+}
+
+/*lo que crea tu js*/
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 15px;
+  margin: 14px 0;
+
+  background: #f9f3e5;
+  border: 2px solid #33322e;
+  border-radius: 12px;
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #8cd4cb;
+  border: 4px solid #33322e;
+}
+
+.check-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chk {
+  width: 20px;
+  height: 20px;
+}
+
+.text {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.item.done .text {
+  text-decoration: line-through;
+  opacity: .6;
+}
+
+.item.done {
+  background: #d0f4f0;
+}
+.actions { 
+	display: flex; gap: 10px; 
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid #33322e;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+.icon-btn:active { 
+	transform: translateY(1px); 
+}
+
+/* responsive*/
+@media (max-width: 900px) {
+  .list-encabezado { grid-template-columns: 1fr; }
+  .mark-all { border-right: 0; border-bottom: 3px solid #2c2c2c; }
+  .add-btn { width: 150px; }
+}

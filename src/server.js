@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Pool de conexiones
+// pool de conexiones
 const db = mysql.createPool({
   host: "localhost",
   database: "tareas",
@@ -18,13 +18,9 @@ const db = mysql.createPool({
   connectionLimit: 10,
 });
 
-// Health check (opcional)
 app.get("/health", (req, res) => res.json({ ok: true }));
 
-/**
- * ✅ READ - Listar tareas
- * GET /api/tareas
- */
+// Listar-tareas
 app.get("/api/tareas", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT id, tarea, estado FROM tabla_tareas ORDER BY id DESC");
@@ -35,10 +31,7 @@ app.get("/api/tareas", async (req, res) => {
   }
 });
 
-/**
- * ✅ READ - Obtener una tarea por ID
- * GET /api/tareas/:id
- */
+//obtener-tarea-por-id
 app.get("/api/tareas/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -62,11 +55,7 @@ app.get("/api/tareas/:id", async (req, res) => {
   }
 });
 
-/**
- * ✅ CREATE - Crear tarea
- * POST /api/tareas
- * Body: { "tarea": "texto", "estado": false }
- */
+//crear
 app.post("/api/tareas", async (req, res) => {
   try {
     const { tarea, estado } = req.body;
@@ -75,7 +64,6 @@ app.post("/api/tareas", async (req, res) => {
       return res.status(400).json({ message: "La 'tarea' es obligatoria y debe ser texto" });
     }
 
-    // estado opcional -> por defecto false
     const estadoBool = estado === true || estado === 1 ? 1 : 0;
 
     const [result] = await db.query(
@@ -94,11 +82,7 @@ app.post("/api/tareas", async (req, res) => {
   }
 });
 
-/**
- * ✅ UPDATE - Actualizar tarea (tarea y/o estado)
- * PUT /api/tareas/:id
- * Body: { "tarea": "...", "estado": true }
- */
+//actualizar
 app.put("/api/tareas/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -140,7 +124,6 @@ app.put("/api/tareas/:id", async (req, res) => {
       return res.status(404).json({ message: "Tarea no encontrada" });
     }
 
-    // devolver registro actualizado
     const [rows] = await db.query(
       "SELECT id, tarea, estado FROM tabla_tareas WHERE id = ?",
       [id]
@@ -153,10 +136,7 @@ app.put("/api/tareas/:id", async (req, res) => {
   }
 });
 
-/**
- * ✅ DELETE - Eliminar tarea
- * DELETE /api/tareas/:id
- */
+//eliminar
 app.delete("/api/tareas/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
