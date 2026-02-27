@@ -7,7 +7,7 @@ html, body {
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, Arial, sans-serif;
+  font-family: system-ui, Arial, sans-serif;
   color: #222;
 
   background: url("../recursos/bg.svg");
