@@ -20,7 +20,7 @@ const db = mysql.createPool({
 
 app.get("/health", (req, res) => res.json({ ok: true }));
 
-// Listar-tareas
+// listar-de-tareas
 app.get("/api/tareas", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT id, tarea, estado FROM tabla_tareas ORDER BY id DESC");

@@ -95,7 +95,7 @@ function render() {
       render();
     });
 
-    // Doble click para editar
+    // doble click para editar
     li.querySelector(".text").addEventListener("dblclick", async () => {
       const nuevoTexto = prompt("Editar tarea:", tarea.tarea);
       if (!nuevoTexto || !nuevoTexto.trim()) return;
