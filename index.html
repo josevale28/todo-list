@@ -7,34 +7,46 @@
     <title>Todo List</title>
 </head>
 <body>
-    <main>
+    <main class="wrap">
         <header class="encabezado">
             <div class="logo">
                 <img src="recursos/todo.svg" alt="">
             </div>
             <nav class="navegacion">
-                <img class="github-icon" alt="github">
+                <img class="github-icon" src="recursos/github.svg" alt="GitHub Icon">
                 <div class="info"><p>About</p></div>
                 <div class="English"><a href="#">En</a></div>
-                <div class="Chino"><a href="#">Ch</a></div>
+                <div class="Chino"><a href="#">中</a></div>
             </nav>
         </header>
-        <section>
+        <section class="input-section">
             <div class="imput">
                 <input id="taskInput" type="text" placeholder="Add a to-do  item..." />
                 <button id="addBtn" class="add-btn">Add</button>
             </div>
         </section>
-        <section class="list-section">
-            <header class="list-encabezado">
-                <button id="markAllBtn" class="mark-all">Mark All Done</button>
-                <p class="slogan">Act Now, Simplify Life. ☕</p>
-            </header>
-            <ul id="taskList" class="list">
-                <div id="emptyState" class="empty">
-                <p><strong>Add Your First To-Do Item!</strong> 📝</p>
+        <section class="layout">
+            <section class="list-section">
+                <header class="list-encabezado">
+                    <button id="markAllBtn" class="mark-all">Mark All Done</button>
+                    <p class="slogan">Act Now, Simplify Life. ☕</p>
+                </header>
+                <ul id="taskList" class="list">
+
+                </ul>
+
+                <div id="vacio-list" class="vacio">
+                    <p class="vacio-titulo">¡Agrega tu primera tarea pendiente! 📝</p>
+                    <ul class="tips">
+                        <li>Presione Enter para enviar acciones.</li>
+                        <li>Haga doble clic para editar tareas.</li>
+                        <li>Use la barra lateral para acciones rápidas.</li>
+                    </ul>
                 </div>
-            </ul>
+                <footer class="list-footer">
+                    <span id="counter">0 artículos</span>
+                </footer>
+            </section>
         </section>
     </main>
     <script src="front/app.js"></script>
