@@ -24,10 +24,28 @@ app.get("/health", (req, res) => res.json({ ok: true }));
 app.get("/api/tareas", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT id, tarea, estado FROM tabla_tareas ORDER BY id DESC");
-    res.status(200).json(rows); // array de objetos
+    res.status(200).json(rows);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener tareas" });
+  }
+});
+
+app.put("/api/tareas/todas", async (req, res) => {
+  try {
+    const { ids } = req.body;
+    const [result] = await db.query(
+      "UPDATE tabla_tareas SET estado = 1 WHERE id IN (?)",
+      [ids]
+    );
+    res.status(200).json({
+      message: "Tareas actualizadas",
+      updated: result.affectedRows
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al actualizar tareas" });
   }
 });
 
@@ -136,6 +154,8 @@ app.put("/api/tareas/:id", async (req, res) => {
   }
 });
 
+
+
 //eliminar
 app.delete("/api/tareas/:id", async (req, res) => {
   try {
@@ -156,6 +176,10 @@ app.delete("/api/tareas/:id", async (req, res) => {
     res.status(500).json({ message: "Error al eliminar tarea" });
   }
 });
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en http://localhost:${PORT}`);

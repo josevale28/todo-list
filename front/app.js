@@ -25,7 +25,7 @@ async function crearTarea(texto) {
     body: JSON.stringify({ tarea: texto, estado: false })
   });
   if (!res.ok) throw new Error("Error al crear");
-  return res.status(400).json();
+  return res.json();
 }
 
 async function actualizarTarea(id, datos) {
@@ -35,12 +35,21 @@ async function actualizarTarea(id, datos) {
     body: JSON.stringify(datos)
   });
   if (!res.ok) throw new Error("Error al actualizar");
-  return res.status(400).json();
+  return res.json();
 }
 
 async function eliminarTarea(id) {
   const res = await fetch(`${API}/${id}`, { method: "DELETE" });
   if (!res.ok) throw new Error("Error al eliminar");
+}
+
+async function marcarTodas(ids) {
+      const res = await fetch("http://localhost:3000/api/tareas/todas", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ids })
+    });
+    return res.json();
 }
 
 
@@ -117,24 +126,27 @@ async function agregar() {
   const nueva = await crearTarea(texto);
   tareas = [nueva, ...tareas];
   taskInput.value = "";
+  taskInput.focus(); 
   render();
 }
 
 addBtn.addEventListener("click", agregar);
 
 taskInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") agregar();
+  if (e.key === "Enter") 
+    agregar();
 });
 
 markAllBtn.addEventListener("click", async () => {
-  const pendientes = tareas.filter(t => !t.estado);
-
-  for (const t of pendientes) {
-    const actualizada = await actualizarTarea(t.id, { estado: true });
-    tareas = tareas.map(x => x.id === t.id ? actualizada : x);
-  }
-
-  render();
+  const ids = tareas.filter(t => !t.estado).map(t => t.id);
+  if (ids.length === 0) return;
+  await marcarTodas(ids);
+    tareas = tareas.map(t =>
+      ids.includes(t.id)
+        ? { ...t, estado: 1 }
+        : t
+    );
+    render();
 });
 
 async function init() {
